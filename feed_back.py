@@ -11,10 +11,6 @@ def get_db_connection():
         password=db_info["password"], # Accessing the password
         port=db_info["port"]          # Accessing the port
     )
-    
-
-st.write(st.secrets)
-
 
 # Function to insert preferences into PostgreSQL
 def insert_preferences(preferences):
@@ -25,7 +21,7 @@ def insert_preferences(preferences):
 
         # Insert statement for user table
         insert_query = """
-        INSERT INTO "user" (
+        INSERT INTO "preferences" (
             preferred_area, 
             preferred_scale, 
             cuisines, 
@@ -59,28 +55,8 @@ def insert_preferences(preferences):
     except Exception as e:
         st.error(f"Error inserting preferences into database: {e}")
         return False
-    if submitted:
-    # Prepare the preferences data for insertion
-        preferences_data = {
-            'Preferred Area': preferred_area,
-            'Preferred_scale': preferred_scale,
-            'Cuisines': ', '.join(cuisines + [other_cuisine] if other_cuisine else cuisines),
-            'Restaurant Type': restaurant_type,
-            'Budget Range': f"₹{budget_range[0]} - ₹{budget_range[1]}",
-            'Ambiance Preferences': ', '.join(ambiance),
-            'Dietary Restrictions': f"Vegetarian: {dietary_restrictions}, Vegan: {vegan_option}, Gluten-Free: {gluten_free}",
-            'Looking for Offers': looking_for_offers,
-        }
 
-        st.write("Inserting the following preferences:", preferences_data)  # Debug output
-
-        # Insert preferences into PostgreSQL and show a success or failure message
-        if insert_preferences(preferences_data):
-            st.success("Thank you for providing your preferences!")
-        else:
-            st.error("Failed to submit your preferences. Please try again.")
-
-
+# Feedback function to collect user preferences
 def feedback():
     st.header("Please provide your preferences")
 
