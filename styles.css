@@ -1,0 +1,57 @@
+/* styles.css */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+}
+h1{
+    color: #c64b82;
+}
+
+ h2, h3, h4 {
+    color: #4b87c6; /* Blue headings */
+}
+
+/* Button Styles */
+.stButton>button {
+    background-color: #007BFF; /* Blue button */
+    color: white; /* White text on button */
+}
+
+.stButton>button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Form Styles */
+form {
+    padding: 20px;
+    background-color: white; /* White background for forms */
+    border-radius: 8px; /* Rounded corners for form */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Success Message */
+.stSuccess {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    padding: 10px;
+    border: 1px solid #c3e6cb; /* Green border */
+}
+
+/* Animation Styles */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animated-heading {
+    animation: slideIn 1.5s ease-in-out;
+}
