@@ -4,7 +4,7 @@ import folium
 from streamlit_folium import folium_static
 import plotly.express as px
 import plotly.graph_objects as go
-from show_form import show_form
+
 from feed_back import feedback
 from data import show_gis_data
 from tree import show_decision_tree
