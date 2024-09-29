@@ -1,20 +1,17 @@
 import streamlit as st
 import pandas as pd
 import folium
-from streamlit_folium import folium_static
 import plotly.express as px
 import plotly.graph_objects as go
-
+from streamlit_folium import folium_static
 from feed_back import feedback
 from data import show_gis_data
 from tree import show_decision_tree
-
-
 # Set page configuration (This should be the first Streamlit command)
-import streamlit as st
+
 
 # Set page configuration
-st.set_page_config(layout="wide", page_title="GeoInsight Restaurant Analysis")
+
 
 # Load CSS
 def load_css():
