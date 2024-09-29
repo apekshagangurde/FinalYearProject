@@ -4,3 +4,4 @@ folium
 streamlit-folium
 plotly
 graphviz
+psycopg2
