@@ -1,4 +1,5 @@
 import streamlit as st
+from map_utils import load_places_data, display_map, display_places_table
 import pandas as pd
 import folium
 import plotly.express as px
@@ -7,6 +8,7 @@ from streamlit_folium import folium_static
 from feed_back import feedback
 from data import show_gis_data
 from tree import show_decision_tree
+
 # Set page configuration (This should be the first Streamlit command)
 
 
@@ -26,7 +28,7 @@ st.markdown('<h1 class="animated-heading">Welcome to GeoInsight Restaurant Analy
 # Continue with your app layout and content
 
 
-page = st.sidebar.selectbox("Select Page", ["Home", " Input form","data" ,"tree"])
+page = st.sidebar.selectbox("Select Page", ["Home", " Input form","data" ,"tree" ,"GIS"])
 if page == "Home":
    
 # Sample Data - Replace this with actual restaurant data
@@ -147,3 +149,7 @@ elif page == "data":
     show_gis_data()
 elif page == "tree":
     show_decision_tree()
+elif page == "GIS":
+    df = load_places_data()
+    display_map(df)
+    display_places_table(df)
