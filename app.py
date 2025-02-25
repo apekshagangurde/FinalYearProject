@@ -5,7 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from streamlit_folium import folium_static
 from folium.plugins import MarkerCluster
-
+from location_recommendation import recommend_locations
 # Import custom modules
 from map_utils import load_places_data, display_map, display_places_table
 from feed_back import feedback
@@ -137,7 +137,9 @@ def load_restaurant_data():
 # Load Data
 df_demographics = load_demographic_data()
 df_restaurants = load_restaurant_data()
-
+st.write("### Suggested Locations for New Restaurants")
+map_object = recommend_locations()  # Call the function
+folium_static(map_object)  # Display the map in Streamlit
 # Sidebar Navigation
 page = st.sidebar.selectbox("Select Page", ["Home", "Demographics", "Restaurants", "Input Form", "Data",  "GIS"])
 
@@ -151,7 +153,7 @@ if page == "Home":
     avg_income = df_demographics["Income Level (Lakhs)"].mean()
 
     col1, col2 = st.columns(2)
-    col1.metric("🌆 Total Population", f"{total_population:,}")
+    col1.metric("🌆 Total Population", f"{total_population:}")
     col2.metric("💰 Avg. Income Level (Lakhs)", f"{avg_income:.2f}")
 
     # Population Distribution Chart
@@ -168,7 +170,7 @@ elif page == "Demographics":
     # Show Area Details
     area_details = df_demographics[df_demographics["Area Name"] == selected_area].iloc[0]
     st.write(f"**🌆 Area:** {area_details['Area Name']}")
-    st.write(f"**👨‍👩‍👧 Population:** {area_details['Population']:,}")
+    st.write(f"**👨‍👩‍👧 Population:** {area_details['Population']:}")
     st.write(f"**💰 Avg. Income Level:** ₹{area_details['Income Level (Lakhs)']} Lakh")
     st.write(f"**👥 Dominant Age Group:** {area_details['Dominant Age Group (Years)']}")
 
@@ -179,7 +181,7 @@ elif page == "Demographics":
     marker_cluster = MarkerCluster().add_to(m)
 
     for _, row in df_demographics.iterrows():
-        popup_text = f"<b>{row['Area Name']}</b><br>Population: {row['Population']:,}<br>Income Level: ₹{row['Income Level (Lakhs)']} Lakh"
+        popup_text = f"<b>{row['Area Name']}</b><br>Population: {row['Population']:}<br>Income Level: ₹{row['Income Level (Lakhs)']} Lakh"
         folium.Marker([row.get("Latitude", 19.95), row.get("Longitude", 73.75)], popup=popup_text).add_to(marker_cluster)
 
     folium_static(m, width=800, height=500)
